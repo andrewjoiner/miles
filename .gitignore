@@ -13,6 +13,8 @@ node_modules/
 *.pem
 client_secret*.json
 auth-profiles.json
+config/openclaw.json
+config/staging.env
 
 # Logs
 logs/

@@ -9,7 +9,20 @@ Miles is a chief of staff / executive assistant AI agent built on OpenClaw for A
 **Related agents:** Ava_Agent (household/family), Open_Claw_v0 (Surveyor — research)
 
 ## Status
-**Phase:** Design — not yet built. VM not provisioned. Project scaffolded with design doc and directory structure.
+**Phase:** V1 Build — VM provisioned, config templates and skills written. Next: Docker/OpenClaw install, Telegram bot, integrations.
+
+## Azure VM Details
+- **Resource Group:** rg-openclaw-eastus
+- **VM Name:** vm-miles-01
+- **Public IP:** 20.124.189.164
+- **Private IP:** 10.0.0.6
+- **Size:** Standard_B2ms (2 vCPU, 8GB RAM)
+- **OS:** Ubuntu 24.04 LTS
+- **SSH Config:** Host alias `miles-vm`
+- **NSG:** vm-miles-01NSG (SSH restricted to Andrew's IP)
+- **Provisioned:** 2026-03-16
+- **Telegram Bot:** @miles_chief_bot
+- **Git Remote:** https://github.com/andrewjoiner/miles.git
 
 ## Knowledge Dependencies
 Before starting work, read these for current context:
