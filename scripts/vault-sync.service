@@ -1,0 +1,18 @@
+[Unit]
+Description=Work Vault git sync (pull + push Miles Outputs)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/openclaw/work-vault
+ExecStart=/bin/bash -c '\
+  git pull --rebase --autostash origin main 2>&1 && \
+  if git status --porcelain "Miles Outputs/" | grep -q .; then \
+    git add "Miles Outputs/" && \
+    git commit -m "miles: vault sync $(date +%%Y-%%m-%%d\\ %%H:%%M)" && \
+    git push origin main 2>&1; \
+  fi'
+
+[Install]
+WantedBy=default.target

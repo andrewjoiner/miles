@@ -1,0 +1,101 @@
+# Tools — Miles
+
+## API Keys & Credentials
+<!-- Actual keys live in .env on the VM. These are references only. -->
+- **Anthropic API:** Routed through Azure AI Foundry (configured in auth-profiles.json)
+- **Telegram Bot:** TELEGRAM_BOT_TOKEN (set in openclaw.json channels config)
+- **Apollo API:** APOLLO_API_KEY (set in .env — read-only access)
+- **Todoist API:** TODOIST_API_TOKEN (set in .env — read-only personal token)
+- **Google Calendar:** Via GoG CLI (OAuth2) — keyring password in .env
+
+## Model Routing
+- **Default model:** anthropic/claude-haiku-4-5 (heartbeats, observation, memory writes)
+- **Reasoning model:** anthropic/claude-sonnet-4-5 (analysis, summarization, drafting — V2+)
+- **CRITICAL:** OpenClaw defaults to Opus on install. ALWAYS verify model before any interaction.
+- **Provider:** Azure AI Foundry (base URL configured in openclaw.json, NOT .bashrc)
+
+## Permitted Tools
+
+### Google Calendar (GoG CLI) — LIVE AFTER SETUP
+GoG CLI installed at `/usr/local/bin/gog`. OAuth authorization required for each account.
+
+**Authorized Accounts:**
+| Account | Purpose | Access |
+|---------|---------|--------|
+| `andrew@wastenaut.ai` | Work calendar (full content — Miles is the work agent) | read/write |
+| `drew.joiner@gmail.com` | Family calendar (opaque — time blocks only) | read-only |
+
+**Quick Reference Commands:**
+```bash
+# List work events this week (default account = andrew@wastenaut.ai)
+gog calendar list --from 2026-03-17 --to 2026-03-23 --plain
+
+# List family calendar as opaque blocks (strip content before processing)
+gog calendar list --account drew.joiner@gmail.com --from 2026-03-17 --to 2026-03-23 --plain
+
+# Create a work calendar event
+gog calendar create --summary "Focus: Stream API" --start "2026-03-17T09:00:00" --end "2026-03-17T11:00:00"
+```
+
+**Privacy Rules:**
+- **Family calendar (drew.joiner@gmail.com):** NEVER show event titles, descriptions, or attendees. Only report time blocks as "Personal Conflict [start-end]".
+- **Work calendar (andrew@wastenaut.ai):** Full content access. This is Miles's primary domain.
+
+### Apollo API — Read-Only
+```bash
+# Example: Get active opportunities
+curl -s -H "X-Api-Key: $APOLLO_API_KEY" \
+  "https://api.apollo.io/v1/opportunities?status=active"
+```
+- Contact records, deal stages, enrichment data
+- Pipeline state for observation and memory writes
+- V1: read-only. No writes to Apollo.
+
+### Todoist API — Read-Only
+```bash
+# Example: Get all active tasks
+curl -s -H "Authorization: Bearer $TODOIST_API_TOKEN" \
+  "https://api.todoist.com/rest/v2/tasks"
+```
+- Task list with deadlines, priorities, project assignments
+- Completion history via activity log
+- V1: read-only. No writes to Todoist.
+
+### Work Vault — Read-Only (V1)
+- Path: `/home/openclaw/work-vault/`
+- Git-synced every 10 minutes via systemd timer
+- Read all files freely — this is Miles's primary knowledge base
+- V1: No writes to vault. V2+: write to `Miles Outputs/` only.
+- Key paths:
+  - `0. Dashboard/Daily Snapshots/` — Cowork daily-scan output
+  - `0. Dashboard/Weekly/` — Weekly planning docs
+  - `1. Projects/` — Project notes with status, tasks, blockers
+  - `2. Areas/` — Strategy, products, positioning, data capabilities
+
+### Telegram — Send/Receive
+- Primary communication channel with Andrew
+- V1: Respond only when Andrew messages directly. No unsolicited messages.
+- Message format: plain text, scannable, no markdown unless helpful
+
+### File Read/Write — Workspace Only
+- Read: workspace/ (all agent config, memory, logs, skills)
+- Write: workspace/MEMORY.md, workspace/logs/, workspace/daily/
+- Never touch: .env, .ssh/, openclaw.json
+
+## Restricted Tools (V1)
+- No email access (Gmail — planned for V2)
+- No CRM write access (HubSpot — planned for V2)
+- No outbound email tools (Instantly — planned for V2)
+- No web browsing or web search
+- No code execution beyond health check scripts
+- No database access (production or otherwise)
+- No Personal Vault access (Ava's domain)
+- No Skylight access (Ava's domain)
+- No family calendar content (opaque blocks only)
+
+## Budget Limits
+- **Monthly API budget:** $25
+- **Alert threshold:** $20 (80%)
+- **Model cost reference (Haiku 4.5):** $0.25/M input, $1.25/M output
+- **If using Azure AI Foundry:** Model costs route through Azure Sponsorship credits = effectively $0
+- **If budget exhausted:** Stop all non-critical operations, log the event

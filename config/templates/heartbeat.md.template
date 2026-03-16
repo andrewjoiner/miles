@@ -1,0 +1,70 @@
+# Heartbeat — Miles
+
+## IMPORTANT: Heartbeat is DISABLED until Telegram is configured
+<!-- OpenClaw heartbeats fire automatically and consume API credits silently.
+     Do NOT enable until the Telegram channel is working and verified.
+     Lesson learned from Open_Claw_v0: heartbeat ran up costs with no notification delivery. -->
+
+## Schedule
+
+### Daily (7:30 AM ET) — V1 Observation Cycle
+This is Miles's primary activity. One cycle per day, using Haiku.
+
+**Step 1 — Read Vault Snapshot:**
+- Check `0. Dashboard/Daily Snapshots/` for today's snapshot (produced by Cowork daily-scan at 7:00 AM)
+- Extract notable changes: Apollo pipeline state, Instantly inbound replies, git activity, file changes, Todoist completions, staleness warnings
+- If no snapshot exists yet (Cowork hasn't run), proceed with API data only
+
+**Step 2 — Call Apollo API:**
+- Get active opportunities with contacts, stages, amounts, last touch dates
+- Compare against yesterday's memory entries for movement detection
+- Note: new deals, stage changes, stale deals (no activity >7 days)
+
+**Step 3 — Call Todoist API:**
+- Get open tasks with deadlines, priorities, project assignments
+- Get recent completions (activity log)
+- Note: overdue tasks, completed tasks, project activity patterns
+
+**Step 4 — Read Work Calendar:**
+- Get today's events from `andrew@wastenaut.ai` via GoG CLI
+- Note: meeting count, total meeting hours, focus time availability
+- If meetings involve known prospects (cross-reference Apollo), note for V2 pre-meeting briefs
+
+**Step 5 — Read Family Calendar (Opaque):**
+- Get today's time blocks from `drew.joiner@gmail.com` via GoG CLI
+- Report ONLY as "Personal Conflict [start-end]" — never titles or details
+- Purpose: understand total time availability (work + personal blocks)
+
+**Step 6 — Compare and Write:**
+- Compare today's observations against yesterday's MEMORY.md entries
+- Write new observations to MEMORY.md with today's date
+- Focus on deltas — what changed, not what stayed the same
+- Format: one observation per line, date-stamped
+
+### No Routine Heartbeat
+- Unlike Ava (30-min system health check), Miles does NOT run a frequent heartbeat in V1
+- One daily observation cycle is sufficient for the shadow period
+- This minimizes API costs and avoids unnecessary processing
+- V2+ may add more frequent checks if warranted
+
+### Nightly (2:00 AM ET) — System Health
+- Check container status, disk usage, memory usage
+- Verify .env permissions are still 600
+- Verify vault sync is running (check git log for recent commits)
+- Do NOT send any messages — log only
+- If critical issue detected (disk >90%, container down), log prominently for next morning review
+
+## Notification Routing (V1)
+
+| Priority | Channel | Timing |
+|----------|---------|--------|
+| Critical | N/A in V1 | Miles does not send unsolicited messages |
+| On-demand | Telegram DM | When Andrew asks a question |
+| Observation | MEMORY.md | After daily cycle |
+| System health | Daily log | Nightly check |
+
+## V2+ Additions (not yet active)
+- Morning brief via Telegram (8:00 AM ET): calendar + priorities + pipeline flags
+- Pre-meeting research briefs (triggered by confirmed meetings with prospects)
+- Email triage summary
+- Weekly pattern report

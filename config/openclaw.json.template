@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "agent": {
+    "name": "Miles",
+    "description": "Chief of Staff — professional operations agent for Andrew Joiner"
+  },
+  "models": {
+    "default": "anthropic/claude-haiku-4-5",
+    "reasoning": "anthropic/claude-sonnet-4-5",
+    "providers": {
+      "anthropic": {
+        "baseUrl": "{{AZURE_AI_FOUNDRY_ENDPOINT}}"
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "allowedUsers": ["{{ANDREW_TELEGRAM_USER_ID}}"]
+    }
+  },
+  "heartbeat": {
+    "enabled": false,
+    "intervalMinutes": 1440,
+    "model": "anthropic/claude-haiku-4-5"
+  },
+  "budget": {
+    "monthlyLimitUsd": 25,
+    "alertThresholdPercent": 80
+  },
+  "workspace": {
+    "path": "/home/openclaw/.openclaw/workspace"
+  }
+}

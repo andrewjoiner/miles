@@ -1,0 +1,82 @@
+# User — Andrew Joiner (Work Context)
+
+## Who Andrew Is
+- Solo founder and CEO of Wastenaut
+- Pre-Series A stage, targeting $750K ARR in 2026
+- Based in Durham, NC
+- Manages all functions: product, engineering, sales, marketing, data, operations
+- ADHD — prefers opinionated recommendations over option lists
+
+## Company — Wastenaut
+Data intelligence platform for the US waste and circular economy market.
+
+### Products
+| Product | Status | Description |
+|---------|--------|-------------|
+| Nexus | Live | Geospatial intelligence platform — facility mapping, hauler coverage, service areas |
+| Stream API | Beta (March 2026) | Material supply API — programmatic access to waste/recycling data |
+| Terminal | Planned (Q2 2026) | Commodity pricing — market rates for recyclable materials |
+
+### Revenue Target
+- 2026: $750K ARR ($500K Nexus + $250K Stream API)
+- Primary motion: outbound sales (Apollo + Instantly) → demo → close
+
+### Infrastructure
+- Database: PostgreSQL 17 on DigitalOcean (~2TB)
+- Backend: AWS SAM (Lambda + API Gateway)
+- Frontend: React/Vite
+- Data sources: EPA, state agencies, proprietary scraping, manual enrichment
+
+## Active Projects
+<!-- 15 active projects organized by workstream -->
+
+### Product Workstream
+- **Stream API** (P1) — API marketplace, public waste data API
+- **Terminal** (P2) — Commodity pricing / market expansion
+- **Schematic** (P2) — Feature flags + billing (Nexus feature)
+
+### GTM Workstream
+- **Fletch** (P1) — RevOps automation (Apollo, Instantly, HubSpot, n8n)
+- **Positioning** (P1) — Strategy, brand, messaging (ICP, personas)
+- **Marketing** (P2) — Content marketing (SEO, LinkedIn, blogs)
+- **Wastenaut-Website** (P3) — HubSpot CMS website
+
+### Data Workstream
+- **Database-Completion** (P2) — Post-migration enrichment (residential, seasonality)
+- **Materials** (P2) — Material taxonomy, properties, NAICS mapping
+- **Collection Schedules** (P3) — MSW collection data + Earth911 scraper
+- **NewPro** (P3) — Facility profile enrichment
+
+### Maintenance
+- **DB-Migration** (P3) — Azure→DO PostgreSQL migration
+- **Parcels** (P3) — Geospatial analysis
+- **Nexus-Docs** (P3) — Platform design docs
+- **wastenaut-specs** (P3) — BDD test specifications
+
+## Tools Andrew Uses
+| Tool | Purpose | Miles Access |
+|------|---------|-------------|
+| Apollo | Lead gen, contact enrichment, deal pipeline | Read (V1) |
+| Todoist | Task management, priorities, deadlines | Read (V1) |
+| Google Calendar | Work schedule, meetings, focus blocks | Read/Write (V1) |
+| Obsidian (Work Vault) | Knowledge base, project notes, strategy docs | Read (V1) |
+| HubSpot | CRM, deal tracking, contact management | None (V2) |
+| Instantly | Cold email sequences, outbound campaigns | None (V2) |
+| Gmail | Email communication | None (V2) |
+| GitHub | Code repos, PRs, issues | None (V2) |
+| Claude Cowork | Human-in-the-loop automations | N/A (Andrew uses directly) |
+
+## Work Patterns
+<!-- These are starting observations. Miles will refine through shadow period. -->
+- **Work hours:** {{TYPICAL_WORK_HOURS}} (to be observed)
+- **Meeting patterns:** {{MEETING_PATTERNS}} (to be observed)
+- **Focus time:** {{FOCUS_TIME_PATTERNS}} (to be observed)
+- **Content cadence:** LinkedIn posts {{FREQUENCY}} (to be observed)
+- **Pipeline review:** {{PIPELINE_REVIEW_CADENCE}} (to be observed)
+
+## Communication Preferences
+- Telegram for agent communication
+- Prefers brief, scannable messages
+- Wants one recommendation, not multiple options
+- Does not want unprompted check-ins or productivity nudges
+- Appreciates silence when everything is on track
